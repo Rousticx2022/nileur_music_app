@@ -1,194 +1,187 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nileur_music_app/Utils/form_validators.dart';
 import 'package:nileur_music_app/screens/login_screen.dart';
 import 'package:nileur_music_app/screens/home_screen.dart';
 
-class SignUpSCreen extends StatelessWidget {
+import '../Utils/common.dart';
+import '../controllers/signup_controller.dart';
+
+class SignUpSCreen extends GetView<SignupController> {
   const SignUpSCreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xff26133C),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20),
-                  child: Text(
-                    'Nileur',
-                    style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.w900,
-                        color: Color(0xffDEB747),
-                        letterSpacing: 2.0
+        backgroundColor: kBlackColor,
+        body: Form(
+          key: controller.formKey,
+          child: ListView(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            children: [
+              Image.asset(
+                "assests/Nileur.png",
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              Row(
+                children: [
+                  Text(
+                    'Sign Up',
+                    style: fontMontserrat(color: Colors.white, fontSize: 40, fontWeight: FontWeight.w900, letterSpacing: 2),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  GestureDetector(
+                    onTap: () => Get.to(const LoginScreen()),
+                    child: Text(
+                      'Log in',
+                      style: fontMontserrat(
+                        color: const Color(0xffB7A3CF),
+                        fontSize: 20,
+                      ),
                     ),
                   ),
+                ],
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Align(
+                alignment: AlignmentDirectional.topStart,
+                child: Text(
+                  'Username',
+                  style: fontMontserrat(fontSize: 17, color: Colors.white, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 40,),
-                Row(
-                  children: [
-                    Text(
-                      'Sign Up',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 40,
-                          fontWeight: FontWeight.w900,
-                          letterSpacing: 2
-                      ),
-                    ),
-                    SizedBox(width: 20,),
-                    GestureDetector(
-                      onTap: ()=>Get.to(LoginScreen()),
-                      child: Text(
-                        'Log in',
-                        style: TextStyle(
-                          color: Color(0xffB7A3CF),
-                          fontSize: 20,
-                        ),
-                      ),
-                    ),
-                  ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                controller: controller.nameController.value,
+                style: fontMontserrat(color: kTextColor),
+                decoration: InputDecoration(
+                  fillColor: kWhiteColor.withOpacity(.1),
+                  filled: true,
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+                  focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+                  enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+                  contentPadding: const EdgeInsets.only(left: 15, bottom: 5, top: 5, right: 15),
+                  hintStyle: const TextStyle(fontSize: 16, color: kTextColor),
+                  hintText: "Enter UserName",
                 ),
-                SizedBox(height: 30,),
-                Align(
-                  alignment: AlignmentDirectional.topStart,
-                  child: Text(
-                    'Username',
-                    style: TextStyle(
-                        fontSize: 17,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold
-                    ),
-                  ),
+                validator: nameValidator,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Align(
+                alignment: AlignmentDirectional.topStart,
+                child: Text(
+                  'Email',
+                  style: fontMontserrat(fontSize: 17, color: Colors.white, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 10,),
-                TextField(
-                  decoration: InputDecoration(
-                      hintText: 'Enter username',
-                      hintStyle: TextStyle(
-                        color: Color(0xffB7A3CF),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0xffDEB747),
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(15)
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                  controller:controller.emailController.value,
+                style: fontMontserrat(color: kTextColor),
+                decoration: InputDecoration(
+                  fillColor: kWhiteColor.withOpacity(.1),
+                  filled: true,
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+                  focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+                  enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+                  contentPadding: const EdgeInsets.only(left: 15, bottom: 5, top: 5, right: 15),
+                  hintStyle: const TextStyle(fontSize: 16, color: kTextColor),
+                  hintText: "Enter Email",
+                ),
+                validator: emailValidator,
+              ),
 
-                      )
-                  ),
+              const SizedBox(
+                height: 10,
+              ),
+              Align(
+                alignment: AlignmentDirectional.topStart,
+                child: Text(
+                  'Password',
+                  style: fontMontserrat(fontSize: 17, color: Colors.white, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 10,),
-                Align(
-                  alignment: AlignmentDirectional.topStart,
-                  child: Text(
-                    'Email',
-                    style: TextStyle(
-                        fontSize: 17,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold
-                    ),
-                  ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                controller: controller.passwordController.value,
+                style: fontMontserrat(color: kTextColor),
+                decoration: InputDecoration(
+                  fillColor: kWhiteColor.withOpacity(.1),
+                  filled: true,
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+                  focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+                  enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+                  contentPadding: const EdgeInsets.only(left: 15, bottom: 5, top: 5, right: 15),
+                  hintStyle: const TextStyle(fontSize: 16, color: kTextColor),
+                  hintText: "Enter Password",
                 ),
-                SizedBox(height: 10,),
-                TextField(
-                  decoration: InputDecoration(
-                      hintStyle: TextStyle(
-                        color: Color(0xffB7A3CF),
-                      ),
-                      hintText: 'i.e-abc@gmail.com',
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0xffDEB747),
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(15)
-                      )
-                  ),
-                ),
-                SizedBox(height: 10,),
-                Align(
-                  alignment: AlignmentDirectional.topStart,
-                  child: Text(
-                    'Password',
-                    style: TextStyle(
-                        fontSize: 17,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold
-                    ),
-                  ),
-                ),
-                SizedBox(height: 10,),
-                TextField(
-                  decoration: InputDecoration(
-                      hintStyle: TextStyle(
-                        color: Color(0xffB7A3CF),
-                      ),
-                      hintText: 'Enter password (Min. 8 character)',
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0xffDEB747),
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(15)
+                validator: passwordValidator,
+              ),
 
-                      )
-                  ),
+              const SizedBox(
+                height: 10,
+              ),
+              Align(
+                alignment: AlignmentDirectional.topStart,
+                child: Text(
+                  'Confirm password',
+                  style: fontMontserrat(fontSize: 17, color: Colors.white, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 10,),
-                Align(
-                  alignment: AlignmentDirectional.topStart,
-                  child: Text(
-                    'Confirm password',
-                    style: TextStyle(
-                        fontSize: 17,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                controller: controller.confirmPasswordController.value,
+                style: fontMontserrat(color: kTextColor),
+                decoration: InputDecoration(
+                  fillColor: kWhiteColor.withOpacity(.1),
+                  filled: true,
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+                  focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+                  enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+                  contentPadding: const EdgeInsets.only(left: 15, bottom: 5, top: 5, right: 15),
+                  hintStyle: const TextStyle(fontSize: 16, color: kTextColor),
+                  hintText: "Confirm Password",
+                ),
+                validator: passwordValidator,
+              ),
+
+              const SizedBox(
+                height: 30,
+              ),
+              MaterialButton(
+                onPressed: ()=>controller.signupWithEmail(),
+                color: kPrimaryColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 18),
+                  child: Center(
+                    child: Text(
+                      'Confirm',
+                      style: fontMontserrat(color: kWhiteColor, fontSize: 20, fontWeight: FontWeight.w600),
                     ),
                   ),
                 ),
-                SizedBox(height: 10,),
-                TextField(
-                  decoration: InputDecoration(
-                      hintStyle: TextStyle(
-                        color: Color(0xffB7A3CF),
-                      ),
-                      hintText: 'Confirm password',
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0xffDEB747),
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(15)
-                      )
-                  ),
-                ),
-                SizedBox(height: 30,),
-                MaterialButton(
-                  onPressed: ()=>Get.to(HomeScreen()),
-                  color: Color(0xffFAE262),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 18),
-                    child: Center(
-                      child: Text(
-                        'Confirm',
-                        style: TextStyle(
-                            color: Color(0xff26133C),
-                            fontSize: 20
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

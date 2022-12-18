@@ -1,44 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:nileur_music_app/controllers/splash_controller.dart';
 import 'package:nileur_music_app/screens/login_screen.dart';
 import 'package:get/get.dart';
 
-class SplashScreen extends StatefulWidget {
+import '../Utils/common.dart';
+
+class SplashScreen extends GetView<SplashController> {
   const SplashScreen({Key? key}) : super(key: key);
-
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-
-  loadApp() {
-    Future.delayed(Duration(seconds: 2), (){
-      Get.to(() => LoginScreen());
-    });
-  }
-
-  @override
-  void initState() {
-    loadApp();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff26133C),
+      backgroundColor: kBlackColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              'Nileur',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900, color: Color(0xffDEB747), letterSpacing: 2.0),
-            ),
-            Text(
+            Image.asset("assests/Frame 1.png"),
+            const SizedBox(height: 30,),
+            Image.asset("assests/Nileur.png",),
+            const Text(
               'The Music App',
-              style: TextStyle(color: Color(0xffB7A3CF), fontSize: 15),
+              style: TextStyle(color: Color(0xffC9B6F1), fontSize: 20),
             ),
           ],
         ),
