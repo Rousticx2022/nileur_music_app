@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nileur_music_app/Utils/collections.dart';
@@ -35,8 +36,11 @@ class ProfileScreen extends GetView<ProfileController> {
                 letterSpacing: 1
             ),
           ),
-          actions:const [
-            Icon(Icons.settings_outlined,color: Colors.white, size: 25,),
+          actions: [IconButton(onPressed: ()async{
+            await FirebaseAuth.instance.signOut();
+            Get.offAllNamed("/login");
+          }, icon: const Icon(Icons.logout,color: Colors.white, size: 25,),)
+
           ],
         ),
         body: StreamBuilder(

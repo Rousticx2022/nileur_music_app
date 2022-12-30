@@ -20,9 +20,8 @@ class LoginController extends GetxController{
           .then((value) async {
         String uid = value.user!.uid;
 
-
         customToast("Welcome");
-        Get.offAllNamed("/home", parameters: {"uid": uid});
+        Get.offAllNamed("/home",parameters: {"uid": uid});
       });
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
